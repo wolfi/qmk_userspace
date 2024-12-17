@@ -4,9 +4,12 @@
 #define QUICK_TAP_TERM 0
 
 // Tap-hold configuration for home row mods.
-#define TAPPING_TERM 175
+#define TAPPING_TERM 200
 #define PERMISSIVE_HOLD
-#define QUICK_TAP_TERM_PER_KEY
+// #define QUICK_TAP_TERM_PER_KEY
+// TODO: Add retro tapping for windows key?
+
+#define ACHORDION_STREAK
 
 // Auto Shift
 #define NO_AUTO_SHIFT_ALPHA
