@@ -62,9 +62,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+// Short aliases for home row mods and other tap-hold keys.
+#define HOME_N LGUI_T(KC_N)
+#define HOME_R LALT_T(KC_R)
+#define HOME_T LCTL_T(KC_T)
+#define HOME_S LSFT_T(KC_S)
+#define HOME_H RSFT_T(KC_H)
+#define HOME_A RCTL_T(KC_A)
+#define HOME_E LALT_T(KC_E)
+#define HOME_I LGUI_T(KC_I)
 
 // Achordion --------------------------------------------------------------------
 // https://getreuer.info/posts/keyboards/achordion/index.html#achordion_eager_mod
+#ifdef ACHORDION_ENABLE
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
 
@@ -87,9 +97,63 @@ bool achordion_eager_mod(uint8_t mod) {
       return false;
   }
 }
-// ------------------------------------------------------------------------------
+
+bool achordion_chord(uint16_t tap_hold_keycode,
+                     keyrecord_t* tap_hold_record,
+                     uint16_t other_keycode,
+                     keyrecord_t* other_record) {
+  // Exceptionally allow specific chords on the same hand
+  switch (tap_hold_keycode) {
+    // case HOME_A:  // Nonsense example
+    //   if (other_keycode == HOME_U) { return true; }
+    //   break;
+  }
+
+  // Also allow same-hand holds when the other key is in the rows below the alphas
+  if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
+
+  // Otherwise, follow the opposite hands rule.
+  return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+uint16_t achordion_streak_chord_timeout(uint16_t tap_hold_keycode, uint16_t next_keycode) {
+  if (IS_QK_LAYER_TAP(tap_hold_keycode)) {
+    return 0;  // Disable streak detection on layer-tap keys.
+  }
+
+  // Exceptions so that certain hotkeys don't get blocked as streaks.
+  // switch (tap_hold_keycode) {
+  //   case HOME_A:
+  //     if (next_keycode == KC_C || next_keycode == KC_V) {
+  //       return 0;
+  //     }
+  //     break;
+  // }
+
+  // Otherwise, tap_hold_keycode is a mod-tap key.
+  uint8_t mod = mod_config(QK_MOD_TAP_GET_MODS(tap_hold_keycode));
+  if ((mod & MOD_LSFT) != 0) {
+    return 100;  // A shorter streak timeout for Shift mod-tap keys.
+  } else {
+    return 220;  // A longer timeout otherwise.
+  }
+}
+#endif  // ACHORDION_ENABLE
 
 // Tap-hold configuration
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
+  switch (keycode) {
+    case HOME_R:
+    case HOME_E:
+      return TAPPING_TERM + 25;
+    case HOME_N:
+    case HOME_I:
+      return TAPPING_TERM + 75;
+    default:
+      return TAPPING_TERM;
+  }
+}
+
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   // If you quickly hold a tap-hold key after tapping it, the tap action is
   // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
@@ -97,22 +161,38 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   // instead want to "force hold" and disable key repeating.
   switch (keycode) {
     case HOME_N:
-    // Repeating is useful for Vim navigation keys.
-    case QHOME_J:
-    case QHOME_K:
-    case QHOME_L:
       return QUICK_TAP_TERM;  // Enable key repeating.
     default:
       return 0;  // Otherwise, force hold and disable key repeating.
   }
 }
 
-// shift functions
-const key_override_t capsword_key_override = ko_make_basic(MOD_MASK_SHIFT, CW_TOGG, KC_CAPS);
-const key_override_t *key_overrides[] = {
-	&capsword_key_override
-};
+// Caps word
+#ifdef CAPS_WORD_ENABLE
+bool caps_word_press_user(uint16_t keycode) {
+  switch (keycode) {
+    // Keycodes that continue Caps Word, with shift applied.
+    case KC_A ... KC_Z:
+      add_weak_mods(MOD_BIT(KC_LSFT));  // Apply shift to the next key.
+      return true;
 
+    // Keycodes that continue Caps Word, without shifting.
+    case KC_1 ... KC_0:
+    case KC_BSPC:
+    case KC_DEL:
+    case KC_UNDS:
+    case M_THE:
+    case M_ION:
+    case M_MENT:
+    case M_QUEN:
+    case M_TMENT:
+      return true;
+
+    default:
+      return false;  // Deactivate Caps Word.
+  }
+}
+#endif  // CAPS_WORD_ENABLE
 
 // thumb combos
 #if defined (MIRYOKU_KLUDGE_THUMBCOMBOS)
