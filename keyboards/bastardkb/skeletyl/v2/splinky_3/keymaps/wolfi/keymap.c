@@ -103,11 +103,11 @@ bool achordion_chord(uint16_t tap_hold_keycode,
                      uint16_t other_keycode,
                      keyrecord_t* other_record) {
   // Exceptionally allow specific chords on the same hand
-  switch (tap_hold_keycode) {
-    // case HOME_A:  // Nonsense example
-    //   if (other_keycode == HOME_U) { return true; }
-    //   break;
-  }
+  // switch (tap_hold_keycode) {
+  //   case HOME_A:  // Nonsense example
+  //     if (other_keycode == HOME_U) { return true; }
+  //     break;
+  // }
 
   // Also allow same-hand holds when the other key is in the rows below the alphas
   if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
@@ -181,11 +181,6 @@ bool caps_word_press_user(uint16_t keycode) {
     case KC_BSPC:
     case KC_DEL:
     case KC_UNDS:
-    case M_THE:
-    case M_ION:
-    case M_MENT:
-    case M_QUEN:
-    case M_TMENT:
       return true;
 
     default:
