@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NAV] = LAYOUT_split_3x5_3(
     XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,              U_RDO,                U_PST,             U_CPY,             U_CUT,             U_UND,
     KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           XXXXXXX,              KC_LEFT,              KC_DOWN,           KC_UP,             KC_RGHT,           KC_CAPS,
-    XXXXXXX,           KC_ALGR,           XXXXXXX,           XXXXXXX,           XXXXXXX,              KC_HOME,              KC_PGDN,           KC_PGUP,           KC_END,            KC_INS,
+    XXXXXXX,           KC_ALGR,           XXXXXXX,           CW_TOGG,           XXXXXXX,              KC_HOME,              KC_PGDN,           KC_PGUP,           KC_END,            KC_INS,
                                           XXXXXXX,           XXXXXXX,           XXXXXXX,              KC_ENT,               KC_BSPC,           KC_DEL
   ),
 
@@ -71,10 +71,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define HOME_A RCTL_T(KC_A)
 #define HOME_E LALT_T(KC_E)
 #define HOME_I LGUI_T(KC_I)
+#define HOME_MEDIA LT(MEDIA, KC_ESC)
+#define HOME_NAV LT(NAV, KC_SPC)
+#define HOME_MOUSE LT(MOUSE, KC_TAB)
+#define HOME_SYM LT(SYM, KC_ENT)
+#define HOME_NUM LT(NUM, KC_BSPC)
+#define HOME_FUN LT(FUN, KC_DEL)
 
 // Achordion --------------------------------------------------------------------
 // https://getreuer.info/posts/keyboards/achordion/index.html#achordion_eager_mod
-#ifdef ACHORDION_ENABLE
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
 
@@ -109,6 +114,21 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   //     break;
   // }
 
+  // Allow all chords from thumb keys
+  if (tap_hold_record->event.key.row == 3) { return true; }
+
+  // Alternatively allow only specific thumb keys
+  // switch (tap_hold_keycode) {
+  //   case HOME_MEDIA:
+  //   case HOME_NAV:
+  //   case HOME_MOUSE:
+  //   case HOME_SYM:
+  //   case HOME_NUM:
+  //   case HOME_FUN:
+  //     return true;
+  //     break;
+  // }
+
   // Also allow same-hand holds when the other key is in the rows below the alphas
   if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
 
@@ -138,7 +158,6 @@ uint16_t achordion_streak_chord_timeout(uint16_t tap_hold_keycode, uint16_t next
     return 220;  // A longer timeout otherwise.
   }
 }
-#endif  // ACHORDION_ENABLE
 
 // Tap-hold configuration
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
