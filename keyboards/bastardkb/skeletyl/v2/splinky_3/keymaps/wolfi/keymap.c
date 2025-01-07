@@ -8,7 +8,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_split_3x5_3(
     KC_B,              KC_L,              KC_D,              KC_W,              KC_V,                 KC_J,                 KC_F,              KC_O,              KC_U,              KC_COMM,
     LGUI_T(KC_N),      LALT_T(KC_R),      LCTL_T(KC_T),      LSFT_T(KC_S),      KC_G,                 KC_Y,                 RSFT_T(KC_H),      RCTL_T(KC_A),      LALT_T(KC_E),      LGUI_T(KC_I),
-    LT(BUTTON,KC_X),   ALGR_T(KC_Q),      KC_M,              KC_C,              KC_Z,                 KC_K,                 KC_P,              KC_QUOT,           ALGR_T(KC_SCLN),   LT(BUTTON,KC_DOT),
+    KC_X,   ALGR_T(KC_Q),      KC_M,              KC_C,              KC_Z,                 KC_K,                 KC_P,              KC_QUOT,           ALGR_T(KC_SCLN),   KC_DOT,
                                           LT(MEDIA, KC_ESC), LT(NAV, KC_SPC),   LT(MOUSE, KC_TAB),    LT(SYM, KC_ENT),      LT(NUM, KC_BSPC),  LT(FUN, KC_DEL)
   ),
 
@@ -52,13 +52,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F11,            KC_F4,             KC_F5,             KC_F6,             KC_SCRL,              XXXXXXX,              KC_RSFT,           KC_RCTL,           KC_LALT,           KC_LGUI,
     KC_F10,            KC_F1,             KC_F2,             KC_F3,             KC_PAUS,              XXXXXXX,              XXXXXXX,           XXXXXXX,           KC_ALGR,           XXXXXXX,
                                           KC_APP,            KC_SPC,            KC_TAB,               XXXXXXX,              XXXXXXX,           XXXXXXX
-  ),
-
-  [BUTTON] = LAYOUT_split_3x5_3(
-    U_UND,             U_CUT,             U_CPY,             U_PST,             U_RDO,                U_RDO,                U_PST,             U_CPY,             U_CUT,             U_UND,
-    KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           KC_NO,                KC_NO,                KC_RSFT,           KC_RCTL,           KC_LALT,           KC_LGUI,
-    U_UND,             U_CUT,             U_CPY,             U_PST,             U_RDO,                U_RDO,                U_PST,             U_CPY,             U_CUT,             U_UND,
-                                          KC_BTN2,           KC_BTN3,           KC_BTN1,              KC_BTN1,              KC_BTN3,           KC_BTN2
   ),
 };
 
