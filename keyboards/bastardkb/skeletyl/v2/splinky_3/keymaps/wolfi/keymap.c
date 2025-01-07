@@ -5,12 +5,22 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+
+#ifdef MOD_TAP_LAYOUT
   [BASE] = LAYOUT_split_3x5_3(
     KC_B,              KC_L,              KC_D,              KC_W,              KC_V,                 KC_J,                 KC_F,              KC_O,              KC_U,              KC_COMM,
     LGUI_T(KC_N),      LALT_T(KC_R),      LCTL_T(KC_T),      LSFT_T(KC_S),      KC_G,                 KC_Y,                 RSFT_T(KC_H),      RCTL_T(KC_A),      LALT_T(KC_E),      LGUI_T(KC_I),
-    KC_X,   ALGR_T(KC_Q),      KC_M,              KC_C,              KC_Z,                 KC_K,                 KC_P,              KC_QUOT,           ALGR_T(KC_SCLN),   KC_DOT,
-                                          LT(MEDIA, KC_ESC), LT(NAV, KC_SPC),   LT(MOUSE, KC_TAB),    LT(SYM, KC_ENT),      LT(NUM, KC_BSPC),  LT(FUN, KC_DEL)
+    KC_X,              KC_Q,              KC_M,              KC_C,              KC_Z,                 KC_K,                 KC_P,              KC_QUOT,           KC_SCLN,           KC_DOT,
+                                          LT(MEDIA, KC_ESC), LT(NAV, KC_SPC),   LT(MOUSE, KC_TAB),    LT(SYM, KC_ENT),      LT(NUM, KC_BSPC),  KC_DEL
   ),
+#else
+  [BASE] = LAYOUT_split_3x5_3(
+    KC_B,              KC_L,              KC_D,              KC_W,              KC_V,                 KC_J,                 KC_F,              KC_O,              KC_U,              KC_COMM,
+    KC_N,              KC_R,              KC_T,              KC_S,              KC_G,                 KC_Y,                 KC_H,              KC_A,              KC_E,              KC_I,
+    KC_X,              KC_Q,              KC_M,              KC_C,              KC_Z,                 KC_K,                 KC_P,              KC_QUOT,           KC_SCLN,           KC_DOT,
+                                          LT(MEDIA, KC_ESC), LT(NAV, KC_SPC),   KC_LSFT,              LT(SYM, KC_ENT),      LT(NUM, KC_BSPC),  KC_DEL
+  ),
+#endif
 
   [NAV] = LAYOUT_split_3x5_3(
     XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,              U_RDO,                U_PST,             U_CPY,             U_CUT,             U_UND,
