@@ -5,6 +5,7 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+#define MOD_TAP_LAYOUT
 
 #ifdef MOD_TAP_LAYOUT
   [BASE] = LAYOUT_split_3x5_3(
