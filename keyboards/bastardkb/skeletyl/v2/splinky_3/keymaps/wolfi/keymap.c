@@ -70,12 +70,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define HOME_A RCTL_T(KC_A)
 #define HOME_E LALT_T(KC_E)
 #define HOME_I LGUI_T(KC_I)
-#define HOME_MEDIA LT(MEDIA, KC_ESC)
 #define HOME_NAV LT(NAV, KC_SPC)
 #define HOME_MOUSE LT(MOUSE, KC_TAB)
 #define HOME_SYM LT(SYM, KC_ENT)
 #define HOME_NUM LT(NUM, KC_BSPC)
-#define HOME_FUN LT(FUN, KC_DEL)
+#define HOME_UML LT(UML, KC_DEL)
 
 bool is_shift_pressed = false;
 
@@ -143,16 +142,15 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   if (tap_hold_record->event.key.row == 3) { return true; }
 
   // Alternatively allow only specific thumb keys
-  // switch (tap_hold_keycode) {
-  //   case HOME_MEDIA:
-  //   case HOME_NAV:
-  //   case HOME_MOUSE:
-  //   case HOME_SYM:
-  //   case HOME_NUM:
-  //   case HOME_FUN:
-  //     return true;
-  //     break;
-  // }
+  switch (tap_hold_keycode) {
+    case HOME_NAV:
+    case HOME_MOUSE:
+    case HOME_SYM:
+    case HOME_NUM:
+    case HOME_UML:
+      return true;
+      break;
+  }
 
   // Also allow same-hand holds when the other key is in the rows below the alphas
   if (other_record->event.key.row % (MATRIX_ROWS / 2) >= 4) { return true; }
