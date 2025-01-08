@@ -5,6 +5,13 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+// Direct sending of dead keys
+#define M_QUOT KC_QUOT:
+#define M_SCLN KC_SCLN:
+#define M_GRV KC_GRV:
+#define M_TILD KC_TILD:
+#define M_CIRC KC_CIRC:
+
 #define MOD_TAP_LAYOUT
 
 #ifdef MOD_TAP_LAYOUT
@@ -80,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool is_shift_pressed = false;
 
 // Achordion --------------------------------------------------------------------
-    // https://getreuer.info/posts/keyboards/achordion/index.html#achordion_eager_mod
+// https://getreuer.info/posts/keyboards/achordion/index.html#achordion_eager_mod
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
 
@@ -99,7 +106,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case KC_GRV:
     case KC_TILD:
     case KC_CIRC:
-      if (IS_LAYER_OFF(UML) && !record->event.pressed) {
+      if (!record->event.pressed) {
         // We only care about the shifted state of KC_SCLN
         if (!(keycode == KC_SCLN && !is_shift_pressed)) {
           tap_code(KC_SPC);

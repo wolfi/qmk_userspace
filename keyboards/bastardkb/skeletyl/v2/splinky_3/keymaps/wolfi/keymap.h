@@ -6,14 +6,15 @@
 #define U_NA KC_NO // present but not available for use
 
 // Layers
-#define BASE   0
+#define BASE    0
 
-#define NAV    4
-#define MOUSE  5
-#define MEDIA  6
-#define NUM    7
-#define SYM    8
-#define FUN    9
+#define NAV     4
+#define MOUSE   5
+#define MEDIA   6
+#define NUM     7
+#define SYM     8
+#define FUN     9
+#define UML    10
 
 // Clipboard
 #if defined (CLIPBOARD_FUN)
