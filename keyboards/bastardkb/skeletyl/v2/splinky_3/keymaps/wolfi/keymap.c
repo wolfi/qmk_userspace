@@ -38,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [MEDIA] = LAYOUT_split_3x5_3(
-    XXXXXXX,             XXXXXXX,         XXXXXXX,           XXXXXXX,           XXXXXXX,              RGB_TOG,              RGB_MOD,           RGB_HUI,           RGB_SAI,           RGB_VAI,
-    KC_LGUI,             KC_LALT,         KC_LCTL,           KC_LSFT,           XXXXXXX,              KC_MPRV,              KC_VOLD,           KC_VOLU,           KC_MNXT,           OU_AUTO,
-    XXXXXXX,             KC_ALGR,         XXXXXXX,           XXXXXXX,           XXXXXXX,              XXXXXXX,              XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,
+    XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,              RGB_TOG,              RGB_MOD,           RGB_HUI,           RGB_SAI,           RGB_VAI,
+    KC_LGUI,           KC_LALT,           KC_LCTL,           KC_LSFT,           XXXXXXX,              KC_MPRV,              KC_VOLD,           KC_VOLU,           KC_MNXT,           OU_AUTO,
+    XXXXXXX,           KC_ALGR,           XXXXXXX,           XXXXXXX,           XXXXXXX,              XXXXXXX,              XXXXXXX,           XXXXXXX,           XXXXXXX,           XXXXXXX,
                                           XXXXXXX,           XXXXXXX,           XXXXXXX,              KC_MSTP,              KC_MPLY,           KC_MUTE
   ),
 
