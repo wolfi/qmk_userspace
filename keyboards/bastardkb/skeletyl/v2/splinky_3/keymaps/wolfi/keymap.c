@@ -83,8 +83,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
 
   switch (keycode) {
-    case KC_LSFT:
-    case KC_RSFT:
+    case HOME_S:
+    case HOME_H:
       if (!record->event.pressed) {
         is_shift_pressed = true;
       } else {
