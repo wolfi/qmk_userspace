@@ -98,7 +98,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     case KC_TILD:
     case KC_CIRC:
       if (IS_LAYER_OFF(UML) && !record->event.pressed) {
-            // We ignore KC_SCLN for now
+        // We ignore KC_SCLN for now
         if (keycode != KC_SCLN) {
           tap_code(KC_SPC);
         }
