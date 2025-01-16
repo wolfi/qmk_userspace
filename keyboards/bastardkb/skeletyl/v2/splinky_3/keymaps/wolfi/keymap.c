@@ -3,10 +3,9 @@
 #include "keymap.h"
 #include "features/achordion.h"
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
 #define MOD_TAP_LAYOUT
 
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef MOD_TAP_LAYOUT
   [BASE] = LAYOUT_split_3x5_3(
     KC_B,              KC_L,              KC_D,              KC_W,              KC_V,                 KC_J,                 KC_F,              KC_O,              KC_U,              KC_COMM,
@@ -78,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool is_shift_pressed = false;
 
 // Achordion --------------------------------------------------------------------
-    // https://getreuer.info/posts/keyboards/achordion/index.html#achordion_eager_mod
+// https://getreuer.info/posts/keyboards/achordion/index.html#achordion_eager_mod
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
   if (!process_achordion(keycode, record)) { return false; }
 

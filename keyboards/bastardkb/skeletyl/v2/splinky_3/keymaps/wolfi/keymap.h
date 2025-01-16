@@ -14,7 +14,7 @@
 #define NUM     7
 #define SYM     8
 #define FUN     9
-#define UML    10
+#define UML     10
 
 // Clipboard
 #if defined (CLIPBOARD_FUN)
