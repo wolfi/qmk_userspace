@@ -1,7 +1,16 @@
 #pragma once
 
 // General settings
-#define DIODE_DIRECTION COL2ROW
+// #define DIODE_DIRECTION COL2ROW
+// #define SERIAL_USART_FULL_DUPLEX   // Enable full duplex operation mode.
+// #define SERIAL_USART_TX_PIN B6     // USART TX pin
+// #define SERIAL_USART_RX_PIN B7     // USART RX pin
+
+#define MASTER_RIGHT
+
+// Reset
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 1000U
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0

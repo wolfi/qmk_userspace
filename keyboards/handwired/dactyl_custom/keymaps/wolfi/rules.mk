@@ -1,0 +1,15 @@
+RGBLIGHT_SUPPORTED = no
+SPLIT_KEYBOARD = yes
+SERIAL_DRIVER = vendor
+WS2812_DRIVER = vendor
+
+CAPS_WORD_ENABLE = yes
+MOUSEKEY_ENABLE = yes
+
+COMMAND_ENABLE = no
+CLIPBOARD_WIN = yes
+
+# SERIAL_DRIVER = usart
+
+SRC += features/achordion.c
+
